@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SolarSystemGenerator : MonoBehaviour
+public class SolarSystemGenerator
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
