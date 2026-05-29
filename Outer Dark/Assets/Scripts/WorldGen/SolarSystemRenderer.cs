@@ -3,21 +3,24 @@ using UnityEngine;
 public class SolarSystemRenderer : MonoBehaviour
 {
 
-    [SerializeField] private Material spaceMaterial;
-    [SerializeField] private Material sunMaterial;
-    [SerializeField] private Material planetMaterial;
-    [SerializeField] private Material asteroidMaterial;
-
+    [SerializeField] private Sprite spaceSprite;
+    [SerializeField] private Sprite sunSprite;
+    [SerializeField] private Sprite planetSprite;
+    [SerializeField] private Sprite asteroidSprite;
+    
     [SerializeField] private GameObject tilePrefab;
-    [SerializeField] private float tileSize = 1.0f;
+    private float tileSize;
 
     private GameObject[,] gridArray;
 
     public void RenderSolarSystem(SolarSystem system) {
+        tileSize = GameManager.Instance.TileSize;
         SystemTile[,] SolarSystemTiles = system.Tiles; // Zugriff auf die Tiles des Sonnensystems, um sie zu rendern
         
         int gridWidth = system.Width;
         int gridHeight = system.Height;
+
+        gridArray = new GameObject[gridWidth, gridHeight];
 
         for (int x = 0; x < gridWidth; x++)
         {
@@ -26,41 +29,30 @@ public class SolarSystemRenderer : MonoBehaviour
                 SystemTile tile = SolarSystemTiles[x, y];
                 if (tile == null) continue; // Überspringe leere Tiles
 
-                Vector2 position = new Vector2(x * tileSize, y * tileSize);
+                Vector2 position = new Vector2(x * tileSize + 0.5f, y * tileSize + 0.5f);
                 GameObject tileGO = Instantiate(tilePrefab, position, Quaternion.identity);
                 tileGO.name = $"{tile.Type}_{x}_{y}";
 
-                Renderer renderer = tileGO.GetComponent<Renderer>();
-                if (renderer != null)
+                gridArray[x, y] = tileGO;
+
+                SpriteRenderer sr = tileGO.GetComponent<SpriteRenderer>();
+                sr.sprite = tile.Type switch
                 {
-                    renderer.material = tile.Type switch
-                    {
-                        TileType.Space => spaceMaterial,
-                        TileType.Star or TileType.StarCore => sunMaterial,
-                        TileType.Planet or TileType.PlanetCore => planetMaterial,
-                        TileType.Asteroid or TileType.AsteroidCore => asteroidMaterial,
-                        _ => spaceMaterial
-                    };
-                }
+                    TileType.Space => spaceSprite,
+                    TileType.Star or TileType.StarCore => sunSprite,
+                    TileType.Planet or TileType.PlanetCore => planetSprite,
+                    TileType.Asteroid or TileType.AsteroidCore => asteroidSprite,
+                    _ => spaceSprite
+                };
             }
         }
     }
 
     // Access a specific cell
-    public SystemTile GetTileAt(int x, int y, SolarSystem system)
+    public GameObject GetTileObject(int x, int y)
     {
-        if (x >= 0 && x < system.Width && y >= 0 && y < system.Height)
-        {
-            return system.Tiles[x, y];
-        }
-        return null;
-    }
-
-    public void BuildTileMap()
-    {
-        SolarSystemGenerator generator = new SolarSystemGenerator();
-        SolarSystem newSystem = generator.GenerateSolarSystem(2000, 400, 400);
-
-        RenderSolarSystem(newSystem);
+        if (x < 0 || x >= gridArray.GetLength(0) || 
+            y < 0 || y >= gridArray.GetLength(1)) return null;
+        return gridArray[x, y];
     }
 }
