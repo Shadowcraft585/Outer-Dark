@@ -28,7 +28,7 @@ public class Melee : Unit { }
 
 public class Commander : Unit { 
     public List<Unit> Subordinates;
-    public List<Ability> Abilities;
+    //public List<Ability> Abilities;
     public void MoveSubordinates(Vector2Int newPosition)
     {
         foreach (Unit subordinate in Subordinates)

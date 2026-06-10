@@ -11,7 +11,6 @@ public enum Spells {
 public class Spell
 {
     public string Name;
-    public SpellType Type;
     public int Damage;
     public int Range;
     public int AreaOfEffect;
