@@ -723,7 +723,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   zoomSpeed: 100
-  minZoom: 5
+  minZoom: 2
   maxZoom: 50
 --- !u!1 &619394800
 GameObject:
@@ -899,6 +899,8 @@ GameObject:
   - component: {fileID: 1924922621}
   - component: {fileID: 1924922622}
   - component: {fileID: 1924922623}
+  - component: {fileID: 1924922624}
+  - component: {fileID: 1924922625}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -915,7 +917,7 @@ Transform:
   m_GameObject: {fileID: 1924922619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.023782402, y: -0.68961436, z: 0.035289258}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -953,6 +955,35 @@ MonoBehaviour:
   seed: 0
   TileSize: 1
   mapSize: 200
+--- !u!114 &1924922624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924922619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2e7c1e82b5baa4bb9531f5a4fea931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  commanderPrefab: {fileID: 5679042280879473778, guid: ea62724d08cbd9e49bdbd6dc8f2ee60f, type: 3}
+  commanderSprites:
+  - {fileID: 1264716516001560631, guid: df9163a38e3db4942bf262b462126634, type: 3}
+  - {fileID: -8206585457261694034, guid: 25b3a6911e908724c8a205e8684e6a49, type: 3}
+--- !u!114 &1924922625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924922619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7af86685dcd46428452e6a8b0c2624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedCommanderView: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

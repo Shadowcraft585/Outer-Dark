@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Spells { 
+public enum SpellTType { 
     Fireball,
     IceSpike,
     LightningBolt,
@@ -14,10 +14,4 @@ public class Spell
     public int Damage;
     public int Range;
     public int AreaOfEffect;
-
-    public void Cast(Unit caster, Unit target)
-    {
-        // Logik hier
-        target.Health -= Damage;
-    }
 }
