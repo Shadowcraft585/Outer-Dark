@@ -78,6 +78,16 @@ public class GameManager : MonoBehaviour
         GameplayLoop.CurrentTurn = 1;
     }
 
+    public void EndTurn()
+    {
+        GameplayLoop.EndTurn();
+
+        foreach (CommanderUnit commander in GameplayLoop.CurrentFaction.Commanders)
+        {
+            commander.StartNewTurn();
+        }
+    }
+
     private void SpawnTestCommander()
     {
         CommanderUnit commander = new CommanderUnit
@@ -106,12 +116,6 @@ public class GameManager : MonoBehaviour
 
         GameplayLoop.CurrentFaction.Commanders.Add(commander);
 
-        GameObject commanderObject = commanderSpawner.SpawnCommander(commander, 0);
-
-        if (commanderController != null && commanderObject != null)
-        {
-            CommanderView view = commanderObject.GetComponent<CommanderView>();
-            commanderController.SelectCommander(view);
-        }
+        commanderSpawner.SpawnCommander(commander, 0);
     }
 }
