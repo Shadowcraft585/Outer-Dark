@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class MapInteract : MonoBehaviour
 {
@@ -13,14 +14,17 @@ public class MapInteract : MonoBehaviour
 
     private GameObject selectedTileObject;
     private Sprite originalSprite;
-
     private SolarSystemRenderer solarSystemRenderer;
+    private CommanderController commanderController;
+    [SerializeField] private CommanderSidebar commanderSidebar;
 
     private void Start()
     {
         tileInfoPanel.SetActive(false);
         solarSystemRenderer = GameManager.Instance
             .GetComponent<SolarSystemRenderer>();
+        commanderController = GameManager.Instance
+            .GetComponent<CommanderController>();
     }
 
     private void Update()
@@ -29,10 +33,12 @@ public class MapInteract : MonoBehaviour
         {
             RestoreSelectedTile();
             tileInfoPanel.SetActive(false);
+            commanderController?.ClearSelection();
             return;
         }
 
         if (!Input.GetMouseButtonDown(0)) return;
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
         float tileSize = GameManager.Instance.TileSize;
 
@@ -58,6 +64,15 @@ public class MapInteract : MonoBehaviour
         RestoreSelectedTile();
 
         HighlightTile(tileObj, tile.Type);
+
+        CommanderView selectedCommander = commanderController != null
+            ? commanderController.SelectedCommanderView
+            : null;
+
+        if (selectedCommander != null && selectedCommander.Data.Position != tile.Position)
+        {
+            commanderController.MoveSelectedCommanderToward(tile.Position, TerrainType.Plains);
+        }
 
         ShowTileInfo(tile);
     }
@@ -100,6 +115,7 @@ public class MapInteract : MonoBehaviour
             + $"PlanetId: {tile.PlanetId}\n"
             + $"Diameter: {tile.Diameter}";
 
+        commanderSidebar?.ShowCommanders(tile.Position);
         tileInfoPanel.SetActive(true);
     }
 }

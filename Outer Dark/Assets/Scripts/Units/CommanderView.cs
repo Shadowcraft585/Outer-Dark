@@ -4,6 +4,7 @@ using UnityEngine;
 public class CommanderView : MonoBehaviour
 {
     public CommanderUnit Data { get; private set; }
+    public Sprite Sprite => spriteRenderer != null ? spriteRenderer.sprite : null;
 
     private SpriteRenderer spriteRenderer;
 

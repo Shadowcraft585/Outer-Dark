@@ -1,9 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class CommanderSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject commanderPrefab;
     [SerializeField] private Sprite[] commanderSprites;
+
+    private readonly List<CommanderView> spawnedCommanders = new();
+
+    public IReadOnlyList<CommanderView> SpawnedCommanders => spawnedCommanders;
 
     public GameObject SpawnCommander(CommanderUnit commander, int spriteIndex)
     {
@@ -35,6 +40,7 @@ public class CommanderSpawner : MonoBehaviour
         }
 
         view.Initialize(commander, commanderSprites[spriteIndex]);
+        spawnedCommanders.Add(view);
         return obj;
     }
 }

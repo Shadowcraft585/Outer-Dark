@@ -51,6 +51,8 @@ public abstract class StackUnit
     public int Armor;
     public int MagicResistance;
     public UnitCategory Category;
+    public Vector2Int Position;
+    public Faction belongsTo;
 }
 
 public class MeleeUnit : StackUnit
