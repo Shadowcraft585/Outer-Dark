@@ -45,7 +45,7 @@ Different ships for different factions
 Mix of high-tech and low-tech weapons  
 Battles are auto-resolved like in CoE5 — what you bring matters more than how you control it  
 
-#🛠️ What Works Right Now  
+# 🛠️ What Works Right Now  
 The project is in very early development. So far:  
 
 ## ✅ Solar System Generation  
@@ -69,6 +69,14 @@ Uses Unity's new Input System
 Left-click selects a tile and highlights it  
 Right-click deselects  
 A panel shows info about the selected tile (position, type, ID, size)  
+
+## ✅ Commander spawning and movement  
+A test commander is spawned into the middle of the generated map.  
+Left-click on the tile with the commander (see above), opens the info panel about the selected tile.  
+This panel includes a picture of the commander with his correspanding stats and stamina.  
+Left-click on the sprite in the panel, selects the commander.  
+Left-clicking another tile moves the commander towards that tile, spending 1 stamina every tile.  
+Right-click deselects.  
 
 # 🗺️ Roadmap  
 
