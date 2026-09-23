@@ -45,7 +45,7 @@ Different ships for different factions
 Mix of high-tech and low-tech weapons  
 Battles are auto-resolved like in CoE5 — what you bring matters more than how you control it  
 
-#🛠️ What Works Right Now  
+# 🛠️ What Works Right Now  
 The project is in very early development. So far:  
 
 ## ✅ Solar System Generation  
